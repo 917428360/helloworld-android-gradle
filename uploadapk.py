@@ -57,9 +57,11 @@ class ApkManage(object):
                       "_api_key" : 'a9acab611e1556015382c5cae360a5ab'}
 
             response = requests.post(url,files=apkfile,data=params,verify=False)
-            print(response.text)
+            #print(response.text)
+            qrcodes = json.loads(response.text)['data']['appQRCodeURL']
             if int(response.status_code) == 200 :
-                print("upload success!  return -->" + str(response.status_code))
+                #print("upload success!  return -->" + str(response.status_code))
+                print(qrcodes)
             else:
                 print("upload error! return -->" + str(response.status_code))
 
