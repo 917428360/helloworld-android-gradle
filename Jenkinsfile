@@ -2,7 +2,7 @@
 * Android Jenkinsfile
 */
 node("master"){
-  /*stage("Checkout"){
+  stage("Checkout"){
     checkout scm
   }
 
@@ -10,21 +10,13 @@ node("master"){
     sh 'chmod +x ./gradlew '
     sh " ${params.buildShell} "
   }
-
- /*stage("Archive"){
-    if (params.buildType == 'release') {
-        archiveArtifacts artifacts: 'app/build/outputs/apk/release/app-release.apk', excludes: 'app/build/outputs/apk/*-unsigned.apk'
-    } else {
-        archiveArtifacts artifacts: 'app/build/outputs/apk/debug/app-debug.apk', excludes: 'app/build/outputs/apk/*-unsigned.apk'
-    }
-  }*/
   
   stage("Upload"){
       sh """  
-         curl -X "POST" "http://api.fir.im/apps"  \
-         -H "Content-Type: application/json" \
-         -d "{\"type\":\"android\", \"bundle_id\":\"${params.bundleId}\", \"api_token\":\"${params.apiToken}\"}"
-          """
+         mv app/build/outputs/apk/debug/app-debug.apk ./${JOB_NAME}.apk
+         python uploadapk.py ${params.bundleId} ${params.apiToken} "${JOB_NAME}.apk" "${JOB_NAME}" "${BUILD_ID}" "${params.apkversion}"
+         
+         """
   
   }
   
