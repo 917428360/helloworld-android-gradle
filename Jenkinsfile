@@ -28,8 +28,9 @@ node("master"){
                                                  "${params.apkName}" "${BUILD_ID}" \
                                                  "${params.apkVersion}" "${params.appPlatform}" """
        
+      result = result - "\n"
       println(result)
-      currentBuild.description="<img src='https://www.pgyer.com//app//qrcodeHistory//ce5a47dffd5b4c3b47e1ae89277a50663c914bee5a4874a6f250ae40be90fa40'>"
+    currentBuild.description="<img src=${result}>"
   }
   
   
