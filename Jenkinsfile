@@ -2,7 +2,7 @@
 * Android Jenkinsfile
 */
 node("master"){
-  /*stage("Checkout"){
+  stage("Checkout"){
     checkout scm
   }
 
@@ -10,7 +10,7 @@ node("master"){
     sh 'chmod +x ./gradlew '
     sh " ${params.buildShell} "
   }
-  */
+  
   stage("Upload"){
       /*sh """ 
          mv app/build/outputs/apk/debug/app-debug.apk ./${params.apkName}.apk
