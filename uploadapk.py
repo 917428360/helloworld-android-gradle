@@ -5,6 +5,8 @@ import requests
 import sys
 import json
 
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class ApkManage(object):
     def __init__(self):
@@ -51,7 +53,7 @@ class ApkManage(object):
     def uploadPgyer(self):
         url = 'https://qiniu-storage.pgyer.com/apiv1/app/upload'
         try:
-            print("upload apk to pgyer ......")
+            #print("upload apk to pgyer ......")
             apkfile = {'file' : open(apkpath,'rb')}
             params = {"uKey" : '7b70873bb4d6e11143f94af9611d2ae5',
                       "_api_key" : 'a9acab611e1556015382c5cae360a5ab'}
