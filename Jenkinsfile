@@ -6,10 +6,6 @@ node("master"){
     checkout scm
   }
 
-  stage ("Prepare"){
-    writeFile file: 'app/src/main/assets/fhconfig.properties', text: params.FH_CONFIG_CONTENT
-  }
-
   stage("Build"){
     sh 'chmod +x ./gradlew'
     if (params.BUILD_CONFIG == 'release') {
