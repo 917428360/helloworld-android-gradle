@@ -2,7 +2,7 @@
 * Android Jenkinsfile
 */
 node("master"){
-  stage("Checkout"){
+  /*stage("Checkout"){
     checkout scm
   }
 
@@ -18,6 +18,15 @@ node("master"){
         archiveArtifacts artifacts: 'app/build/outputs/apk/debug/app-debug.apk', excludes: 'app/build/outputs/apk/*-unsigned.apk'
     }
   }*/
+  
+  stage("Upload"){
+      sh """  
+         curl -X "POST" "http://api.fir.im/apps"  \
+         -H "Content-Type: application/json" \
+         -d "{\"type\":\"android\", \"bundle_id\":\"${params.bundleId}\", \"api_token\":\"${params.apiToken}\"}"
+          """
+  
+  }
   
   
 }
