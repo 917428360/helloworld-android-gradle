@@ -7,7 +7,7 @@ node("master"){
   }
 
   stage("Build"){
-    sh 'chmod +x ./gradlew'
+    sh 'chmod +x ./gradlew && source /etc/profile'
     if (params.BUILD_CONFIG == 'release') {
       sh './gradlew clean assembleRelease' // builds app/build/outputs/apk/app-release.apk file
     } else {
