@@ -8,7 +8,7 @@ node("master"){
 
   stage("Build"){
     sh 'chmod +x ./gradlew '
-    sh "params.buildShell"
+    sh " ${params.buildShell} "
   }
 
  stage("Archive"){
