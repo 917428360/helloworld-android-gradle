@@ -24,11 +24,11 @@ class ApkManage(object):
 
         return cert['cert']['binary']
 
-    def apkUpload(self):
+    def uploadFir(self):
         certdata = self.getCert()
         
         try:
-            print("upload apk .....")
+            print("upload apk to fir......")
             apkfile = {'file' : open(apkpath,'rb')}
             params = {"key"   : certdata['key'],
                       "token" : certdata['token'],
@@ -48,6 +48,27 @@ class ApkManage(object):
             print("error: " + str(e))
 
 
+    def uploadPgyer(self):
+        url = 'https://qiniu-storage.pgyer.com/apiv1/app/upload'
+        try:
+            print("upload apk to pgyer ......")
+            apkfile = {'file' : open(apkpath,'rb')}
+            params = {"uKey" : '7b70873bb4d6e11143f94af9611d2ae5',
+                      "_api_key" : 'a9acab611e1556015382c5cae360a5ab'}
+
+            response = requests.post(url,files=apkfile,data=params,verify=False)
+            print(response.text)
+            if int(response.status_code) == 200 :
+                print("upload success!  return -->" + str(response.status_code))
+            else:
+                print("upload error! return -->" + str(response.status_code))
+
+        except Exception as e:
+            raise
+       
+
+
+
 if __name__ == '__main__':
     bundleid = sys.argv[1]
     apitoken = sys.argv[2]
@@ -55,6 +76,8 @@ if __name__ == '__main__':
     appname = sys.argv[4]
     buildid = sys.argv[5]
     appversion = sys.argv[6]
+    platform = sys.argv[7]
 
     server = ApkManage()
-    server.apkUpload()
+    #server.uploadFir()
+    server.uploadPgyer()
