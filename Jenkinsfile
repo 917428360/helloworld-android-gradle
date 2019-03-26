@@ -14,7 +14,7 @@ node("master"){
   stage("Upload"){
       sh """  
          mv app/build/outputs/apk/debug/app-debug.apk ./${JOB_NAME}.apk
-         python uploadapk.py ${params.bundleId} ${params.apiToken} "${JOB_NAME}.apk" "${JOB_NAME}" "${BUILD_ID}" "${params.apkversion}"
+         python uploadapk.py ${params.bundleId} ${params.apiToken} "${JOB_NAME}.apk" "${JOB_NAME}" "${BUILD_ID}" "${params.apkVersion}"
          
          """
   
