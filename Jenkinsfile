@@ -8,6 +8,7 @@ node("master"){
 
   stage("Build"){
     sh 'chmod +x ./gradlew && source /etc/profile'
+    sh " sdkmanager --list "
     if (params.BUILD_CONFIG == 'release') {
       sh './gradlew clean assembleRelease' // builds app/build/outputs/apk/app-release.apk file
     } else {
