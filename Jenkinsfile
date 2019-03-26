@@ -10,7 +10,7 @@ node("master"){
     sh 'chmod +x ./gradlew '
    
     
-    if (params.BUILD_CONFIG == 'release') {
+    if (params.buildType == 'release') {
       sh './gradlew clean assembleRelease' // builds app/build/outputs/apk/app-release.apk file
     } else {
       sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
@@ -18,10 +18,10 @@ node("master"){
   }
 
  stage("Archive"){
-    if (params.BUILD_CONFIG == 'release') {
-        archiveArtifacts artifacts: 'app/build/outputs/apk/**/app-release.apk', excludes: 'app/build/outputs/apk/*-unaligned.apk'
+    if (params.buildType == 'release') {
+        archiveArtifacts artifacts: 'app/build/outputs/apk/**/app-release.apk', excludes: 'app/build/outputs/apk/*-unsigned.apk'
     } else {
-        archiveArtifacts artifacts: 'app/build/outputs/apk/**/app-debug.apk', excludes: 'app/build/outputs/apk/*-unaligned.apk'
+        archiveArtifacts artifacts: 'app/build/outputs/apk/**/app-debug.apk', excludes: 'app/build/outputs/apk/*-unsigned.apk'
     }
   }
 }
