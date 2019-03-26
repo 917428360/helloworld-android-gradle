@@ -8,13 +8,7 @@ node("master"){
 
   stage("Build"){
     sh 'chmod +x ./gradlew '
-   
-    
-    if (params.buildType == 'release') {
-      sh './gradlew clean assembleRelease' // builds app/build/outputs/apk/app-release.apk file
-    } else {
-      sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
-    }
+    sh "params.buildShell"
   }
 
  stage("Archive"){
