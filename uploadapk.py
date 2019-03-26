@@ -76,8 +76,11 @@ if __name__ == '__main__':
     appname = sys.argv[4]
     buildid = sys.argv[5]
     appversion = sys.argv[6]
-    platform = sys.argv[7]
+    platform= sys.argv[7]
 
     server = ApkManage()
-    #server.uploadFir()
-    server.uploadPgyer()
+
+    if platform == 'fir':
+        server.uploadFir()
+    elif platform == 'pgyer':
+        server.uploadPgyer()
