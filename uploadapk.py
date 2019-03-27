@@ -55,8 +55,8 @@ class ApkManage(object):
         try:
             #print("upload apk to pgyer ......")
             apkfile = {'file' : open(apkpath,'rb')}
-            params = {"uKey" : '7b70873bb4d6e11143f94af9611d2ae5',
-                      "_api_key" : 'a9acab611e1556015382c5cae360a5ab'}
+            params = {"uKey" : 'bfefa01dae76a4a9593751a6929033d7',
+                      "_api_key" : 'cf9e323c7099a77c74e1a278bee63b09'}
 
             response = requests.post(url,files=apkfile,data=params,verify=False)
             #print(response.text)
