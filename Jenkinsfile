@@ -3,12 +3,15 @@
 */
 node("master"){
   stage("Checkout"){
-    slackSend baseUrl: "https://alstru.slack.com/services/hooks/jenkins-ci/",
-    tokenCredentialId: "Xq9oMDPRlDNCB97uwbAqLqCL",
-    message: "Publishing ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-    checkout scm
+      steps {
+        slackSend baseUrl: "https://alstru.slack.com/services/hooks/jenkins-ci/",
+          tokenCredentialId: "Xq9oMDPRlDNCB97uwbAqLqCL",
+          message: "Packaging ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+          checkout scm
+      }
   }
 
+  
   stage("Build"){
     slackSend baseUrl: "https://alstru.slack.com/services/hooks/jenkins-ci/",
     tokenCredentialId: "Xq9oMDPRlDNCB97uwbAqLqCL",
