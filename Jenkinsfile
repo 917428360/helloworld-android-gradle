@@ -3,27 +3,17 @@
 */
 node("master"){
   stage("Checkout"){
-      steps {
-        slackSend baseUrl: "https://alstru.slack.com/services/hooks/jenkins-ci/",
-          tokenCredentialId: "Xq9oMDPRlDNCB97uwbAqLqCL",
-          message: "Packaging ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-          checkout scm
-      }
+    slackSend baseUrl: "https://alstru.slack.com/services/hooks/jenkins-ci/",tokenCredentialId: "Xq9oMDPRlDNCB97uwbAqLqCL",message: "Publishing ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+    checkout scm
   }
 
   
   stage("Build"){
-    slackSend baseUrl: "https://alstru.slack.com/services/hooks/jenkins-ci/",
-    tokenCredentialId: "Xq9oMDPRlDNCB97uwbAqLqCL",
-    message: "Publishing ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
     sh 'chmod +x ./gradlew '
     sh " ${params.buildShell} "
   }
   
   stage("Upload"){
-    slackSend baseUrl: "https://alstru.slack.com/services/hooks/jenkins-ci/",
-    tokenCredentialId: "Xq9oMDPRlDNCB97uwbAqLqCL",
-    message: "Publishing ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
       /*sh """ 
          mv app/build/outputs/apk/debug/app-debug.apk ./${params.apkName}.apk
          python uploadapk.py ${params.bundleId} \
